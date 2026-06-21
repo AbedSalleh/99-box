@@ -1,0 +1,264 @@
+:root {
+  --bg: #0f1117;
+  --panel: #1a1d27;
+  --panel-2: #232733;
+  --empty: #2a2f3d;
+  --empty-hover: #353b4d;
+  --filled: #2f6f4f;
+  --filled-hover: #3a8a62;
+  --accent: #5b8cff;
+  --text: #e6e8ee;
+  --muted: #9aa0ad;
+  --danger: #e0566b;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+}
+
+.tagline {
+  color: var(--muted);
+  max-width: 36rem;
+  margin: 0.5rem auto 1rem;
+  line-height: 1.5;
+}
+
+.clock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  background: var(--panel);
+  border: 1px solid var(--panel-2);
+  border-radius: var(--radius);
+  padding: 0.7rem 1.4rem;
+}
+
+.clock-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.clock-time {
+  font-size: 1.8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.clock.urgent .clock-time {
+  color: var(--danger);
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem;
+}
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+  vertical-align: -1px;
+  margin-right: 0.3rem;
+}
+.swatch-empty {
+  background: var(--empty);
+}
+.swatch-filled {
+  background: var(--filled);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.box {
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 8px;
+  background: var(--empty);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.box:hover {
+  background: var(--empty-hover);
+  transform: translateY(-2px);
+}
+
+.box.filled {
+  background: var(--filled);
+}
+.box.filled:hover {
+  background: var(--filled-hover);
+}
+
+.box.filled::after {
+  content: "🔒";
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  font-size: 0.6rem;
+}
+
+/* Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--panel-2);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+
+.modal h2 {
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
+}
+
+.close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.close:hover {
+  color: var(--text);
+}
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.8rem 0 0.3rem;
+}
+
+textarea,
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid #333947;
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+button.primary {
+  margin-top: 1.2rem;
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.primary:hover {
+  filter: brightness(1.1);
+}
+button.primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.msg {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  min-height: 1.1rem;
+}
+.msg.error {
+  color: var(--danger);
+}
+.msg.ok {
+  color: #57c98a;
+}
+
+.revealed {
+  background: var(--panel-2);
+  border-radius: 6px;
+  padding: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
